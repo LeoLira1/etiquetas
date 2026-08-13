@@ -1,0 +1,19 @@
+# Fixado: atualizações automáticas do Streamlit Cloud já quebraram o
+# camda-estoque (abas, deprecação de st.components.v1.html). Mesma versão que
+# ele usa, para os dois apps se comportarem igual.
+streamlit==1.59.0
+# starlette 1.4.0 tornou `thread_minimum_size` um argumento keyword-only
+# OBRIGATÓRIO em GZipResponder.__init__. O middleware de gzip do streamlit
+# 1.59.0 não passa esse argumento, então TODA requisição HTTP morre com
+#   TypeError: GZipResponder.__init__() missing 1 required keyword-only
+#              argument: 'thread_minimum_size'
+# e o app nem chega a servir a página ("Oh no. Error running app."). Como o
+# streamlit declara apenas `starlette>=0.40.0` (sem teto), qualquer redeploy
+# instalaria a versão nova. Manter o teto até subir de versão do streamlit.
+starlette>=0.40.0,<1.4
+# Réplica local embarcada + sync com o Turso. O import é `libsql`.
+libsql>=0.0.3
+python-dotenv>=1.0.0
+# QR das etiquetas. Python puro, sem Pillow, e gera SVG — que imprime nítido
+# em qualquer tamanho de célula, que é justamente o que este app varia.
+segno>=1.6.0
