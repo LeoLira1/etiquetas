@@ -1,0 +1,14 @@
+# Credenciais do Turso e senha de acesso — NUNCA versionar.
+.streamlit/secrets.toml
+.env
+
+# Réplica local embarcada do libSQL (banco + metadados de sync).
+*.db
+*.db-*
+etiquetas_local.db*
+
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.DS_Store
